@@ -6,7 +6,7 @@ import (
 	"log"
 	"time"
 
-	pb "github.com/akshitababel/assesment-TrainTicketingSystem/train_proto/github.com/akshitababel/assesment-TrainTicketingSystem" // Update with the correct import path
+	pb "github.com/akshitababel/assesment-TrainTicketingSystem/train_proto/github.com/akshitababel/assesment-TrainTicketingSystem"
 
 	"google.golang.org/grpc"
 )
