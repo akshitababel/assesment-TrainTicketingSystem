@@ -7,7 +7,7 @@ import (
 	"net"
 	"sync"
 
-	pb "github.com/akshitababel/assesment-TrainTicketingSystem/train_proto/github.com/akshitababel/assesment-TrainTicketingSystem" // Replace with your actual import path
+	pb "github.com/akshitababel/assesment-TrainTicketingSystem/train_proto/github.com/akshitababel/assesment-TrainTicketingSystem"
 	"google.golang.org/grpc"
 )
 
