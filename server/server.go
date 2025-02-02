@@ -7,8 +7,7 @@ import (
 	"net"
 	"sync"
 
-	pb "train_proto" // Replace with your actual import path
-
+	pb "github.com/akshitababel/assesment-TrainTicketingSystem/train_proto/github.com/akshitababel/assesment-TrainTicketingSystem" // Replace with your actual import path
 	"google.golang.org/grpc"
 )
 
@@ -104,7 +103,7 @@ func (s *TrainTicketService) GetUsersBySection(ctx context.Context, req *pb.Sect
 	defer s.mu.Unlock()
 
 	var userList pb.UserList
-	for email, receipt := range s.users {
+	for _, receipt := range s.users {
 		if receipt.Section == req.Section {
 			userList.Users = append(userList.Users, &pb.UserInfo{Name: receipt.UserName, SeatNumber: receipt.SeatNumber})
 		}
@@ -131,7 +130,7 @@ func (s *TrainTicketService) RemoveUser(ctx context.Context, req *pb.RemoveUserR
 	delete(s.users, req.Email)
 	delete(s.seats, req.Email)
 
-	return &pb.RemoveUserResponse{Success: true, Message: "user removed"}, nil
+	return &pb.RemoveUserResponse{Success: true, Message: "user removed:" + req.Email}, nil
 }
 
 // gRPC Method: Modify Seat
@@ -161,7 +160,7 @@ func (s *TrainTicketService) ModifySeat(ctx context.Context, req *pb.ModifySeatR
 	}
 	s.seats[req.Email] = req.NewSeatNumber
 
-	return &pb.ModifySeatResponse{Success: true, Message: "seat updated"}, nil
+	return &pb.ModifySeatResponse{Success: true, Message: "seat updated to:" + s.seats[req.Email]}, nil
 }
 
 // Start gRPC server
