@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+package train;
+
+option go_package="github.com/akshitababel/assesment-TrainTicketingSystem";
+
+service TrainTicketService {
+  // API to purchase a ticket
+  rpc PurchaseTicket (PurchaseRequest) returns (Receipt);
+
+  // API to get receipt details
+  rpc GetReceipt (ReceiptRequest) returns (Receipt);
+
+  // API to get users in a section
+  rpc GetUsersBySection (SectionRequest) returns (UserList);
+
+  // API to remove a user from the train
+  rpc RemoveUser (RemoveUserRequest) returns (RemoveUserResponse);
+
+  // API to modify a user's seat
+  rpc ModifySeat (ModifySeatRequest) returns (ModifySeatResponse);
+}
+
+// **Message Definitions**
+
+// Request to purchase a ticket
+message PurchaseRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string email = 3;
+}
+
+// Response containing receipt details
+message Receipt {
+  string from = 1;
+  string to = 2;
+  string user_name = 3;
+  string email = 4;
+  double price_paid = 5;
+  string section = 6;
+  string seat_number = 7;
+}
+
+// Request to get receipt
+message ReceiptRequest {
+  string email = 1;
+}
+
+// Request to get users in a section
+message SectionRequest {
+  string section = 1;
+}
+
+// Response containing list of users and their seats
+message UserList {
+  repeated UserInfo users = 1;
+}
+
+message UserInfo {
+  string name = 1;
+  string seat_number = 2;
+}
+
+// Request to remove a user
+message RemoveUserRequest {
+  string email = 1;
+}
+
+// Response for removing user
+message RemoveUserResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+// Request to modify seat
+message ModifySeatRequest {
+  string email = 1;
+  string new_seat_number = 2;
+}
+
+// Response for modifying seat
+message ModifySeatResponse {
+  bool success = 1;
+  string message = 2;
+}
